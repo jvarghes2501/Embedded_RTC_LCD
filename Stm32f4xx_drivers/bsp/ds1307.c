@@ -4,14 +4,15 @@
  *  Created on: Jun 3, 2025
  *      Author: jesti
  */
+
+
 #include "ds1307.h"
-#include "driver/inc/stm32f407xx_gpio_driver.h"
-#include <string.h>
-#include "driver/inc/stm32f407xx_i2c_driver.h"
+#include "stm32f407xx_i2c_driver.h"
+#include "stm32f407xx_gpio_driver.h"
 
 I2C_Handle_t DS1307_I2CHandle;
 static void DS1307_write(uint8_t value, uint8_t reg_addr);
-static void DS1307_read(uint8_t reg_addr);
+static uint8_t DS1307_read(uint8_t reg_addr);
 static uint8_t binary_to_bcd(uint8_t value);
 static uint8_t bcd_to_binary(uint8_t value);
 
@@ -20,11 +21,10 @@ static void DS1307_write(uint8_t value, uint8_t reg_addr)
 	uint8_t tx_data[2];
 	tx_data[0] = reg_addr;
 	tx_data[1] = value;
-
 	I2C_MasterSendData(&DS1307_I2CHandle, tx_data, 2, DS1307_I2C_ADDRESS, 0);
 
 }
-static void DS1307_read(uint8_t reg_addr)
+static uint8_t DS1307_read(uint8_t reg_addr)
 {
 	uint8_t rx_Data;
 	I2C_MasterSendData(&DS1307_I2CHandle, &reg_addr, 1, DS1307_I2C_ADDRESS, 0);
@@ -72,6 +72,7 @@ uint8_t ds1307_init(void)
 
 	GPIO_Init(&I2C_SDA_PIN);
 
+
 	I2C_SCL_PIN.pGPIOx = DS1307_I2C_GPIO_PORT;
 	I2C_SCL_PIN.GPIO_PinConfig.GPIO_PinAltFunMode = 4;
 	I2C_SCL_PIN.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_ALTFN;
@@ -95,7 +96,7 @@ uint8_t ds1307_init(void)
 	DS1307_write(0x00, DS1307_ADDR_SEC);
 
 	// read the clock halt bit to check if it was set
-	uint8_t clock_halt_state = DS1307_write(DS1307_ADDR_SEC);
+	uint8_t clock_halt_state = DS1307_read(DS1307_ADDR_SEC);
 
 	return ((clock_halt_state >> 7) & 0x1);
 

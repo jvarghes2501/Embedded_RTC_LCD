@@ -7,7 +7,11 @@
 
 #ifndef DS1307_H_
 #define DS1307_H_
-#include "STM32F407xx.h"
+#include <stdint.h>
+#include <stddef.h>
+#include <string.h>
+#include "stm32f407xx.h"
+
 
 #define DS1307_I2C					I2C1
 #define DS1307_I2C_GPIO_PORT	 	GPIOB

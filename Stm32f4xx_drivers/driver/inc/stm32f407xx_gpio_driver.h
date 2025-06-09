@@ -4,11 +4,11 @@
  *  Created on: Apr 17, 2025
  *      Author: jesti
  */
+#include "stm32f407xx.h"
 
 #ifndef INC_STM32F407XX_GPIO_DRIVER_H_
 #define INC_STM32F407XX_GPIO_DRIVER_H_
 
-#include "stm32f407xx.h"
 
 /*
  * configuration structure for GPIO pin that the user can control

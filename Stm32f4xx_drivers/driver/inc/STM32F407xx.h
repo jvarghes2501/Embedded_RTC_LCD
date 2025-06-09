@@ -219,9 +219,9 @@ typedef struct {
 # define SPI2					((SPI_RegDef_t*)SPI2_BASEADDR)
 # define SPI3					((SPI_RegDef_t*)SPI3_BASEADDR)
 
-# define I2C1					((I2C_RegDef_t)*I2C1_BASEADDR)
-# define I2C2					((I2C_RegDef_t)*I2C2_BASEADDR)
-# define I2C3					((I2C_RegDef_t)*I2C3_BASEADDR)
+# define I2C1					((I2C_RegDef_t*)I2C1_BASEADDR)
+# define I2C2					((I2C_RegDef_t*)I2C2_BASEADDR)
+# define I2C3					((I2C_RegDef_t*)I2C3_BASEADDR)
 
 # define USART1					((USART_RegDef_t)*USART1_BASEADDR)
 # define USART2					((USART_RegDef_t) *USART2_BASEADDR)
@@ -510,5 +510,8 @@ typedef struct {
 
 
 //#include "stm32f407xx_gpio_driver.h"
+//#include "stm32f407xx_i2c_driver.c"
 //#include "stm32f407xx_SPI_driver.h"
+
+
 #endif /* INC_STM32F407XX_H_ */
